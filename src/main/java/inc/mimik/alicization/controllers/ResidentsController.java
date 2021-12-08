@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping( "/api" )
-public class ResidentController {
+public class ResidentsController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger( ResidentController.class );
+  private static final Logger LOGGER = LoggerFactory.getLogger( ResidentsController.class );
 
   @GetMapping( path = "/get-resident/{name}" )
   public ResponseEntity<Object> getResident( @PathVariable String name ) {

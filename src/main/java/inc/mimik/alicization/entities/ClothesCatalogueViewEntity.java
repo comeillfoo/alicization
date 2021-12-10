@@ -6,53 +6,12 @@ import java.util.Objects;
 @Entity
 @Table( name = "clothes_catalogue", schema = "s284733", catalog = "studs" )
 public class ClothesCatalogueViewEntity {
-  private Long id;
-  private Integer item;
-  private String patternName;
-  private Integer patternDensity;
   private String colour;
   private String type;
-
-  @Id
-  @Basic
-  @Column( name = "id" )
-  public Long getId( ) {
-    return id;
-  }
-
-  public void setId( Long id ) {
-    this.id = id;
-  }
-
-  @Basic
-  @Column( name = "item" )
-  public Integer getItem( ) {
-    return item;
-  }
-
-  public void setItem( Integer item ) {
-    this.item = item;
-  }
-
-  @Basic
-  @Column( name = "pattern_name" )
-  public String getPatternName( ) {
-    return patternName;
-  }
-
-  public void setPatternName( String patternName ) {
-    this.patternName = patternName;
-  }
-
-  @Basic
-  @Column( name = "pattern_density" )
-  public Integer getPatternDensity( ) {
-    return patternDensity;
-  }
-
-  public void setPatternDensity( Integer patternDensity ) {
-    this.patternDensity = patternDensity;
-  }
+  private Integer patternDensity;
+  private String patternName;
+  private Integer item;
+  private Long id;
 
   @Basic
   @Column( name = "colour" )
@@ -74,16 +33,56 @@ public class ClothesCatalogueViewEntity {
     this.type = type;
   }
 
+  @Basic
+  @Column( name = "pattern_density" )
+  public Integer getPatternDensity( ) {
+    return patternDensity;
+  }
+
+  public void setPatternDensity( Integer patternDensity ) {
+    this.patternDensity = patternDensity;
+  }
+
+  @Basic
+  @Column( name = "pattern_name" )
+  public String getPatternName( ) {
+    return patternName;
+  }
+
+  public void setPatternName( String patternName ) {
+    this.patternName = patternName;
+  }
+
+  @Basic
+  @Column( name = "item" )
+  public Integer getItem( ) {
+    return item;
+  }
+
+  public void setItem( Integer item ) {
+    this.item = item;
+  }
+  @Id
+  @Basic
+  @Column( name = "id" )
+  public Long getId( ) {
+    return id;
+  }
+
+  public void setId( Long id ) {
+    this.id = id;
+  }
+
   @Override
   public boolean equals( Object o ) {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     ClothesCatalogueViewEntity that = ( ClothesCatalogueViewEntity ) o;
-    return Objects.equals( id, that.id ) && Objects.equals( item, that.item ) && Objects.equals( patternName, that.patternName ) && Objects.equals( patternDensity, that.patternDensity ) && Objects.equals( colour, that.colour ) && Objects.equals( type, that.type );
+    return Objects.equals( colour, that.colour ) && Objects.equals( type, that.type ) && Objects.equals( patternDensity, that.patternDensity ) && Objects.equals( patternName, that.patternName ) && Objects.equals( item, that.item ) && Objects.equals( id, that.id );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, item, patternName, patternDensity, colour, type );
+    return Objects.hash( colour, type, patternDensity, patternName, item, id );
   }
 }

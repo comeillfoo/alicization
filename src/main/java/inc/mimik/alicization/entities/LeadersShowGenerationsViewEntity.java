@@ -7,12 +7,22 @@ import java.util.Objects;
 @Entity
 @Table( name = "leaders_show_generations", schema = "s284733", catalog = "studs" )
 public class LeadersShowGenerationsViewEntity {
+  private Long id;
   private String fkSuitName;
   private Date kingdomReignEnddate;
   private String name;
   private String fkSexName;
-
   @Id
+  @Basic
+  @Column( name = "id" )
+  public Long getId( ) {
+    return id;
+  }
+
+  public void setId( Long id ) {
+    this.id = id;
+  }
+
   @Basic
   @Column( name = "fk_suit_name" )
   public String getFkSuitName( ) {
@@ -58,11 +68,11 @@ public class LeadersShowGenerationsViewEntity {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     LeadersShowGenerationsViewEntity that = ( LeadersShowGenerationsViewEntity ) o;
-    return Objects.equals( fkSuitName, that.fkSuitName ) && Objects.equals( kingdomReignEnddate, that.kingdomReignEnddate ) && Objects.equals( name, that.name ) && Objects.equals( fkSexName, that.fkSexName );
+    return Objects.equals( id, that.id ) && Objects.equals( fkSuitName, that.fkSuitName ) && Objects.equals( kingdomReignEnddate, that.kingdomReignEnddate ) && Objects.equals( name, that.name ) && Objects.equals( fkSexName, that.fkSexName );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( fkSuitName, kingdomReignEnddate, name, fkSexName );
+    return Objects.hash( id, fkSuitName, kingdomReignEnddate, name, fkSexName );
   }
 }

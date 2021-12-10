@@ -7,6 +7,7 @@ import java.util.Objects;
 @Table( name = "gaits", schema = "s284733", catalog = "studs" )
 public class GaitsEntity {
   private int id;
+  private Integer fkResidentId;
   private String name;
 
   @Id
@@ -17,6 +18,16 @@ public class GaitsEntity {
 
   public void setId( int id ) {
     this.id = id;
+  }
+
+  @Basic
+  @Column( name = "fk_resident_id" )
+  public Integer getFkResidentId( ) {
+    return fkResidentId;
+  }
+
+  public void setFkResidentId( Integer fkResidentId ) {
+    this.fkResidentId = fkResidentId;
   }
 
   @Basic
@@ -34,11 +45,11 @@ public class GaitsEntity {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     GaitsEntity that = ( GaitsEntity ) o;
-    return id == that.id && Objects.equals( name, that.name );
+    return id == that.id && Objects.equals( fkResidentId, that.fkResidentId ) && Objects.equals( name, that.name );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, name );
+    return Objects.hash( id, fkResidentId, name );
   }
 }

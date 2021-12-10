@@ -6,20 +6,9 @@ import java.util.Objects;
 @Entity
 @Table( name = "kingdoms_count_males", schema = "s284733", catalog = "studs" )
 public class KingdomsCountMalesViewEntity {
-  private Long id;
   private String kingdom;
   private Long males;
-
-  @Id
-  @Basic
-  @Column( name = "id" )
-  public Long getId( ) {
-    return id;
-  }
-
-  public void setId( Long id ) {
-    this.id = id;
-  }
+  private Long id;
 
   @Basic
   @Column( name = "kingdom" )
@@ -40,17 +29,27 @@ public class KingdomsCountMalesViewEntity {
   public void setMales( Long males ) {
     this.males = males;
   }
+  @Id
+  @Basic
+  @Column( name = "id" )
+  public Long getId( ) {
+    return id;
+  }
+
+  public void setId( Long id ) {
+    this.id = id;
+  }
 
   @Override
   public boolean equals( Object o ) {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     KingdomsCountMalesViewEntity that = ( KingdomsCountMalesViewEntity ) o;
-    return Objects.equals( id, that.id ) && Objects.equals( kingdom, that.kingdom ) && Objects.equals( males, that.males );
+    return Objects.equals( kingdom, that.kingdom ) && Objects.equals( males, that.males ) && Objects.equals( id, that.id );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, kingdom, males );
+    return Objects.hash( kingdom, males, id );
   }
 }

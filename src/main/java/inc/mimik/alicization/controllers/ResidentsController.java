@@ -7,12 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping( "/api" )
 public class ResidentsController {
@@ -22,12 +21,19 @@ public class ResidentsController {
 
   @GetMapping( path = "/get-residents" )
   public ResponseEntity<List<ResidentsEntity>> getResidents( ) {
-    LOGGER.info( "\ngetResident: started" );
+    LOGGER.info( "\ngetResidents: started" );
 
-    LOGGER.info( "getResident: trying to get all residents" );
+    LOGGER.info( "getResidents: trying to get all residents" );
 
-    LOGGER.info( "getResident: trying to return all residents" );
-    return new ResponseEntity<List<ResidentsEntity>>( service.getAll(), HttpStatus.OK );
+    LOGGER.info( "getResidents: trying to return all residents" );
+    return new ResponseEntity<>( service.getAll(), HttpStatus.OK );
+  }
+
+  @GetMapping( path = "/get-resident-by-id/{id}" )
+  public ResponseEntity<ResidentsEntity> getResident( @PathVariable int id ) {
+    LOGGER.info( "\ngetResident[ {} ]: started", id );
+    LOGGER.info( "\ngetResident[ {} ]: trying to get resident", id );
+    return new ResponseEntity<>( service.getById( id ), HttpStatus.OK );
   }
 
   public ResidentsController( @Autowired ResidentsService service ) {

@@ -6,32 +6,21 @@ import java.util.Objects;
 @Entity
 @Table( name = "kingdoms_show_residents", schema = "s284733", catalog = "studs" )
 public class KingdomsShowResidentsViewEntity {
-  private Long id;
-  private String name;
-  private String sex;
-  private String residentSuit;
   private String role;
+  private String sex;
+  private String name;
+  private Long id;
   private String kingdom;
-
-  @Id
-  @Basic
-  @Column( name = "id" )
-  public Long getId( ) {
-    return id;
-  }
-
-  public void setId( Long id ) {
-    this.id = id;
-  }
+  private String residentSuit;
 
   @Basic
-  @Column( name = "name" )
-  public String getName( ) {
-    return name;
+  @Column( name = "role" )
+  public String getRole( ) {
+    return role;
   }
 
-  public void setName( String name ) {
-    this.name = name;
+  public void setRole( String role ) {
+    this.role = role;
   }
 
   @Basic
@@ -45,23 +34,23 @@ public class KingdomsShowResidentsViewEntity {
   }
 
   @Basic
-  @Column( name = "resident_suit" )
-  public String getResidentSuit( ) {
-    return residentSuit;
+  @Column( name = "name" )
+  public String getName( ) {
+    return name;
   }
 
-  public void setResidentSuit( String residentSuit ) {
-    this.residentSuit = residentSuit;
+  public void setName( String name ) {
+    this.name = name;
   }
-
+  @Id
   @Basic
-  @Column( name = "role" )
-  public String getRole( ) {
-    return role;
+  @Column( name = "id" )
+  public Long getId( ) {
+    return id;
   }
 
-  public void setRole( String role ) {
-    this.role = role;
+  public void setId( Long id ) {
+    this.id = id;
   }
 
   @Basic
@@ -74,16 +63,26 @@ public class KingdomsShowResidentsViewEntity {
     this.kingdom = kingdom;
   }
 
+  @Basic
+  @Column( name = "resident_suit" )
+  public String getResidentSuit( ) {
+    return residentSuit;
+  }
+
+  public void setResidentSuit( String residentSuit ) {
+    this.residentSuit = residentSuit;
+  }
+
   @Override
   public boolean equals( Object o ) {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     KingdomsShowResidentsViewEntity that = ( KingdomsShowResidentsViewEntity ) o;
-    return Objects.equals( id, that.id ) && Objects.equals( name, that.name ) && Objects.equals( sex, that.sex ) && Objects.equals( residentSuit, that.residentSuit ) && Objects.equals( role, that.role ) && Objects.equals( kingdom, that.kingdom );
+    return Objects.equals( role, that.role ) && Objects.equals( sex, that.sex ) && Objects.equals( name, that.name ) && Objects.equals( id, that.id ) && Objects.equals( kingdom, that.kingdom ) && Objects.equals( residentSuit, that.residentSuit );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, name, sex, residentSuit, role, kingdom );
+    return Objects.hash( role, sex, name, id, kingdom, residentSuit );
   }
 }

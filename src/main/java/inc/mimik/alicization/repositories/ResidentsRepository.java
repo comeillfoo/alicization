@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ResidentsRepository extends CrudRepository<ResidentsEntity, Integer> {
-  public List<ResidentsEntity> findAll();
+  List<ResidentsEntity> findAll();
+  ResidentsEntity findById( int id );
 }

@@ -6,8 +6,21 @@ import java.util.Objects;
 @Entity
 @Table( name = "residents", schema = "s284733", catalog = "studs" )
 public class ResidentsEntity {
-  private int id;
   private String name;
+  private int id;
+  private String fkSuitName;
+  private String fkRoleName;
+  private String fkSexName;
+
+  @Basic
+  @Column( name = "name" )
+  public String getName( ) {
+    return name;
+  }
+
+  public void setName( String name ) {
+    this.name = name;
+  }
 
   @Id
   @Column( name = "id" )
@@ -20,13 +33,33 @@ public class ResidentsEntity {
   }
 
   @Basic
-  @Column( name = "name" )
-  public String getName( ) {
-    return name;
+  @Column( name = "fk_suit_name" )
+  public String getFkSuitName( ) {
+    return fkSuitName;
   }
 
-  public void setName( String name ) {
-    this.name = name;
+  public void setFkSuitName( String fkSuitName ) {
+    this.fkSuitName = fkSuitName;
+  }
+
+  @Basic
+  @Column( name = "fk_role_name" )
+  public String getFkRoleName( ) {
+    return fkRoleName;
+  }
+
+  public void setFkRoleName( String fkRoleName ) {
+    this.fkRoleName = fkRoleName;
+  }
+
+  @Basic
+  @Column( name = "fk_sex_name" )
+  public String getFkSexName( ) {
+    return fkSexName;
+  }
+
+  public void setFkSexName( String fkSexName ) {
+    this.fkSexName = fkSexName;
   }
 
   @Override
@@ -34,11 +67,11 @@ public class ResidentsEntity {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     ResidentsEntity that = ( ResidentsEntity ) o;
-    return id == that.id && Objects.equals( name, that.name );
+    return id == that.id && Objects.equals( name, that.name ) && Objects.equals( fkSuitName, that.fkSuitName ) && Objects.equals( fkRoleName, that.fkRoleName ) && Objects.equals( fkSexName, that.fkSexName );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, name );
+    return Objects.hash( name, id, fkSuitName, fkRoleName, fkSexName );
   }
 }

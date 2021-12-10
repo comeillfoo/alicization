@@ -6,17 +6,18 @@ import java.util.Objects;
 @Entity
 @Table( name = "kingdoms", schema = "s284733", catalog = "studs" )
 public class KingdomsEntity {
-  private int id;
+  private String fkSuitName;
   private int numberOfResidents;
+  private int id;
 
-  @Id
-  @Column( name = "id" )
-  public int getId( ) {
-    return id;
+  @Basic
+  @Column( name = "fk_suit_name" )
+  public String getFkSuitName( ) {
+    return fkSuitName;
   }
 
-  public void setId( int id ) {
-    this.id = id;
+  public void setFkSuitName( String fkSuitName ) {
+    this.fkSuitName = fkSuitName;
   }
 
   @Basic
@@ -29,16 +30,26 @@ public class KingdomsEntity {
     this.numberOfResidents = numberOfResidents;
   }
 
+  @Id
+  @Column( name = "id" )
+  public int getId( ) {
+    return id;
+  }
+
+  public void setId( int id ) {
+    this.id = id;
+  }
+
   @Override
   public boolean equals( Object o ) {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     KingdomsEntity that = ( KingdomsEntity ) o;
-    return id == that.id && numberOfResidents == that.numberOfResidents;
+    return numberOfResidents == that.numberOfResidents && id == that.id && Objects.equals( fkSuitName, that.fkSuitName );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, numberOfResidents );
+    return Objects.hash( fkSuitName, numberOfResidents, id );
   }
 }

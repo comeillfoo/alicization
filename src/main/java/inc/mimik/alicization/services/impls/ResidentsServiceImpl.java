@@ -18,6 +18,11 @@ public class ResidentsServiceImpl implements ResidentsService {
     return repo.findAll();
   }
 
+  @Override
+  public ResidentsEntity getById( int id ) {
+    return repo.findById( id );
+  }
+
   public ResidentsServiceImpl( @Autowired ResidentsRepository repo ) {
     this.repo = repo;
   }

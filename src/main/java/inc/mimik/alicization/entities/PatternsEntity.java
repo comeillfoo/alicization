@@ -6,18 +6,8 @@ import java.util.Objects;
 @Entity
 @Table( name = "patterns", schema = "s284733", catalog = "studs" )
 public class PatternsEntity {
-  private int id;
   private String description;
-
-  @Id
-  @Column( name = "id" )
-  public int getId( ) {
-    return id;
-  }
-
-  public void setId( int id ) {
-    this.id = id;
-  }
+  private int id;
 
   @Basic
   @Column( name = "description" )
@@ -27,6 +17,16 @@ public class PatternsEntity {
 
   public void setDescription( String description ) {
     this.description = description;
+  }
+
+  @Id
+  @Column( name = "id" )
+  public int getId( ) {
+    return id;
+  }
+
+  public void setId( int id ) {
+    this.id = id;
   }
 
   @Override
@@ -39,6 +39,6 @@ public class PatternsEntity {
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, description );
+    return Objects.hash( description, id );
   }
 }

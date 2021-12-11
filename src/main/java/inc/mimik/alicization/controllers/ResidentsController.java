@@ -1,11 +1,7 @@
 package inc.mimik.alicization.controllers;
 
-import inc.mimik.alicization.entities.RegistrationsEntity;
-import inc.mimik.alicization.entities.ResidencesEntity;
-import inc.mimik.alicization.entities.ResidentsEntity;
-import inc.mimik.alicization.services.RegistrationsService;
-import inc.mimik.alicization.services.ResidencesService;
-import inc.mimik.alicization.services.ResidentsService;
+import inc.mimik.alicization.entities.*;
+import inc.mimik.alicization.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +20,8 @@ public class ResidentsController {
   private ResidentsService residentsService;
   private ResidencesService residencesService;
   private RegistrationsService registrationsService;
+  private WeaponsService weaponsService;
+  private ToolsService toolsService;
   private static final Logger LOGGER = LoggerFactory.getLogger( ResidentsController.class );
 
   @GetMapping( path = "/get-residents" )
@@ -46,7 +44,7 @@ public class ResidentsController {
   @GetMapping( path = "/get-residents-registrations/{id}" )
   public ResponseEntity<List<RegistrationsEntity>> getResidentsRegistrations( @PathVariable int id ) {
     LOGGER.info( "\ngetResidentsRegistrations[ {} ]: started", id );
-    LOGGER.info( "\ngetResidentsRegistrations[ {} ]: trying to get resident", id );
+    LOGGER.info( "\ngetResidentsRegistrations[ {} ]: trying to get residences", id );
     List<ResidencesEntity> residentsRecords = residencesService.findAllByFkResidentId( id );
     List<Integer> registrationsIds = residentsRecords
         .stream( )
@@ -55,11 +53,29 @@ public class ResidentsController {
     return new ResponseEntity<>( registrationsService.findAllByIdIn( registrationsIds ), HttpStatus.OK );
   }
 
+  @GetMapping( path = "/get-tools-by-resident-id/{id}" )
+  public ResponseEntity<List<ToolsEntity>> getToolsByResidentId( @PathVariable int id ) {
+    LOGGER.info( "\ngetToolsByResidentId[ {} ]: started", id );
+    LOGGER.info( "\ngetToolsByResidentId[ {} ]: trying to get tools", id );
+    return new ResponseEntity<>( toolsService.findAllByFkResidentId( id ), HttpStatus.OK );
+  }
+
+  @GetMapping( path = "/get-weapons-by-resident-id/{id}" )
+  public ResponseEntity<List<WeaponsEntity>> getWeaponsByResidentId( @PathVariable int id ) {
+    LOGGER.info( "\ngetWeaponsByResidentId[ {} ]: started", id );
+    LOGGER.info( "\ngetWeaponsByResidentId[ {} ]: trying to get weapons", id );
+    return new ResponseEntity<>( weaponsService.findAllByFkResidentId( id ), HttpStatus.OK );
+  }
+
   public ResidentsController( @Autowired ResidentsService residentsService,
                               @Autowired ResidencesService residencesService,
-                              @Autowired RegistrationsService registrationsService ) {
+                              @Autowired RegistrationsService registrationsService,
+                              @Autowired WeaponsService weaponsService,
+                              @Autowired ToolsService toolsService ) {
     this.residentsService = residentsService;
     this.residencesService = residencesService;
     this.registrationsService = registrationsService;
+    this.weaponsService = weaponsService;
+    this.toolsService = toolsService;
   }
 }

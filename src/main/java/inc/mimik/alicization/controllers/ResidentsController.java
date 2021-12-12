@@ -1,11 +1,13 @@
 package inc.mimik.alicization.controllers;
 
 import inc.mimik.alicization.entities.*;
+import inc.mimik.alicization.models.RenamingResidentModel;
 import inc.mimik.alicization.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +67,16 @@ public class ResidentsController {
     LOGGER.info( "\ngetWeaponsByResidentId[ {} ]: started", id );
     LOGGER.info( "\ngetWeaponsByResidentId[ {} ]: trying to get weapons", id );
     return new ResponseEntity<>( weaponsService.findAllByFkResidentId( id ), HttpStatus.OK );
+  }
+
+  @PostMapping( path = "/update-resident-name-by-id", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<ResidentsEntity> updateResidentNameById( @RequestBody RenamingResidentModel renamedRequest ) {
+    LOGGER.info( "\nupdateResidentNameById[ {} ]: started", renamedRequest.getId() );
+    LOGGER.info( "\nupdateResidentNameById[ {} ]: trying to rename", renamedRequest.getId() );
+    final int updated = residentsService.updateResidentNameById( renamedRequest.getId(), renamedRequest.getName() );
+    HttpStatus status = updated > 0? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+    LOGGER.info( "\nupdateResidentNameById[ {} ]: renamed {}", renamedRequest.getId(), updated );
+    return new ResponseEntity<>( residentsService.getById( renamedRequest.getId() ), status );
   }
 
   public ResidentsController( @Autowired ResidentsService residentsService,

@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ResidencesRepository extends JpaRepository<ResidencesEntity, ResidencesEntityPK> {
   List<ResidencesEntity> findByFkResidentId( int id );
+
+  int deleteAllByFkResidentId( int id );
 }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ToolsService {
   List<ToolsEntity> findAllByFkResidentId( int id );
+
+  void deleteById( int id );
 }

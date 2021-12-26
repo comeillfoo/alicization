@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,6 +78,30 @@ public class ResidentsController {
     HttpStatus status = updated > 0? HttpStatus.OK : HttpStatus.BAD_REQUEST;
     LOGGER.info( "\nupdateResidentNameById[ {} ]: renamed {}", renamedRequest.getId(), updated );
     return new ResponseEntity<>( residentsService.getById( renamedRequest.getId() ), status );
+  }
+
+  @DeleteMapping( path = "/delete-resident-by-id/{id}" )
+  public ResponseEntity<?> deleteResidentById( @PathVariable int id ) {
+    LOGGER.info( "\ndeleteResidentById[ {} ]: deleting started", id );
+    residentsService.deleteById( id );
+    LOGGER.info( "\ndeleteResidentById[ {} ]: successfully deleted resident", id );
+    return new ResponseEntity<>( null, HttpStatus.OK );
+  }
+
+  @DeleteMapping( path = "/delete-resident-tool-by-id/{id}" )
+  public ResponseEntity<?> deleteResidentToolById( @PathVariable int id ) {
+    LOGGER.info( "\ndeleteResidentToolById[ {} ]: deleting started", id );
+    toolsService.deleteById( id );
+    LOGGER.info( "\ndeleteResidentToolById[ {} ]: successfully deleted resident's tool", id );
+    return new ResponseEntity<>( null, HttpStatus.OK );
+  }
+
+  @DeleteMapping( path = "/delete-resident-weapon-by-id/{id}" )
+  public ResponseEntity<?> deleteResidentWeaponById( @PathVariable int id ) {
+    LOGGER.info( "\ndeleteResidentWeaponById[ {} ]: deleting started", id );
+    weaponsService.deleteById( id );
+    LOGGER.info( "\ndeleteResidentWeaponById[ {} ]: successfully deleted resident's weapon", id );
+    return new ResponseEntity<>( null, HttpStatus.OK );
   }
 
   public ResidentsController( @Autowired ResidentsService residentsService,

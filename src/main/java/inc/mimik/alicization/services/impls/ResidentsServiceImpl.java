@@ -12,25 +12,31 @@ import java.util.List;
 @Service
 public class ResidentsServiceImpl implements ResidentsService {
 
-  private ResidentsRepository repo;
+  private ResidentsRepository residentsRepo;
 
   @Override
   public List<ResidentsEntity> getAll( ) {
-    return repo.findAll();
+    return residentsRepo.findAll();
   }
 
   @Override
   public ResidentsEntity getById( int id ) {
-    return repo.findById( id );
+    return residentsRepo.findById( id );
+  }
+
+  @Override
+  @Transactional
+  public void deleteById( int id ) {
+    residentsRepo.deleteById( id );
   }
 
   @Override
   @Transactional
   public int updateResidentNameById( int id, String name ) {
-    return repo.updateResidentNameById( id, name );
+    return residentsRepo.updateResidentNameById( id, name );
   }
 
-  public ResidentsServiceImpl( @Autowired ResidentsRepository repo ) {
-    this.repo = repo;
+  public ResidentsServiceImpl( @Autowired ResidentsRepository residentsRepo ) {
+    this.residentsRepo = residentsRepo;
   }
 }

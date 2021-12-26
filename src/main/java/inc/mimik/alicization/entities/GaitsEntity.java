@@ -7,8 +7,8 @@ import java.util.Objects;
 @Table( name = "gaits", schema = "s284733", catalog = "studs" )
 public class GaitsEntity {
   private int id;
-  private Integer fkResidentId;
   private String name;
+  private Integer fkResidentId;
 
   @Id
   @Column( name = "id" )
@@ -21,16 +21,6 @@ public class GaitsEntity {
   }
 
   @Basic
-  @Column( name = "fk_resident_id" )
-  public Integer getFkResidentId( ) {
-    return fkResidentId;
-  }
-
-  public void setFkResidentId( Integer fkResidentId ) {
-    this.fkResidentId = fkResidentId;
-  }
-
-  @Basic
   @Column( name = "name" )
   public String getName( ) {
     return name;
@@ -40,16 +30,26 @@ public class GaitsEntity {
     this.name = name;
   }
 
+  @Basic
+  @Column( name = "fk_resident_id" )
+  public Integer getFkResidentId( ) {
+    return fkResidentId;
+  }
+
+  public void setFkResidentId( Integer fkResidentId ) {
+    this.fkResidentId = fkResidentId;
+  }
+
   @Override
   public boolean equals( Object o ) {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     GaitsEntity that = ( GaitsEntity ) o;
-    return id == that.id && Objects.equals( fkResidentId, that.fkResidentId ) && Objects.equals( name, that.name );
+    return id == that.id && Objects.equals( name, that.name ) && Objects.equals( fkResidentId, that.fkResidentId );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, fkResidentId, name );
+    return Objects.hash( id, name, fkResidentId );
   }
 }

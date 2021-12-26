@@ -7,9 +7,9 @@ import java.util.Objects;
 @Table( name = "tools", schema = "s284733", catalog = "studs" )
 public class ToolsEntity {
   private int id;
-  private int fkResidentId;
-  private int fkKingdomId;
   private String name;
+  private int fkKingdomId;
+  private int fkResidentId;
 
   @Id
   @Column( name = "id" )
@@ -22,13 +22,13 @@ public class ToolsEntity {
   }
 
   @Basic
-  @Column( name = "fk_resident_id" )
-  public int getFkResidentId( ) {
-    return fkResidentId;
+  @Column( name = "name" )
+  public String getName( ) {
+    return name;
   }
 
-  public void setFkResidentId( int fkResidentId ) {
-    this.fkResidentId = fkResidentId;
+  public void setName( String name ) {
+    this.name = name;
   }
 
   @Basic
@@ -42,13 +42,13 @@ public class ToolsEntity {
   }
 
   @Basic
-  @Column( name = "name" )
-  public String getName( ) {
-    return name;
+  @Column( name = "fk_resident_id" )
+  public int getFkResidentId( ) {
+    return fkResidentId;
   }
 
-  public void setName( String name ) {
-    this.name = name;
+  public void setFkResidentId( int fkResidentId ) {
+    this.fkResidentId = fkResidentId;
   }
 
   @Override
@@ -56,11 +56,11 @@ public class ToolsEntity {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     ToolsEntity that = ( ToolsEntity ) o;
-    return id == that.id && fkResidentId == that.fkResidentId && fkKingdomId == that.fkKingdomId && Objects.equals( name, that.name );
+    return id == that.id && fkKingdomId == that.fkKingdomId && fkResidentId == that.fkResidentId && Objects.equals( name, that.name );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( id, fkResidentId, fkKingdomId, name );
+    return Objects.hash( id, name, fkKingdomId, fkResidentId );
   }
 }

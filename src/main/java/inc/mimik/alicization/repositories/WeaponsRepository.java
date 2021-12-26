@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface WeaponsRepository extends JpaRepository<WeaponsEntity, Integer> {
   List<WeaponsEntity> findAllByFkResidentId( int id );
+
+  void deleteById( int id );
 }

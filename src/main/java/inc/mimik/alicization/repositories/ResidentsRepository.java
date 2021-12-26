@@ -14,6 +14,8 @@ public interface ResidentsRepository extends JpaRepository<ResidentsEntity, Inte
   List<ResidentsEntity> findAll();
   ResidentsEntity findById( int id );
 
+  void deleteById( int id );
+
   @Modifying
   @Query( "update ResidentsEntity r set r.name = ?2 where r.id = ?1" )
   int updateResidentNameById( int id, String name );

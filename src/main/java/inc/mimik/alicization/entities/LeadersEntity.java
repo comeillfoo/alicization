@@ -7,11 +7,21 @@ import java.util.Objects;
 @Entity
 @Table( name = "leaders", schema = "s284733", catalog = "studs" )
 public class LeadersEntity {
-  private int fkKingdomId;
-  private Integer fkCrownId;
   private int id;
-  private int fkResidentId;
+  private int fkKingdomId;
   private Date kingdomReignEnddate;
+  private int fkResidentId;
+  private Integer fkCrownId;
+
+  @Id
+  @Column( name = "id" )
+  public int getId( ) {
+    return id;
+  }
+
+  public void setId( int id ) {
+    this.id = id;
+  }
 
   @Basic
   @Column( name = "fk_kingdom_id" )
@@ -24,23 +34,13 @@ public class LeadersEntity {
   }
 
   @Basic
-  @Column( name = "fk_crown_id" )
-  public Integer getFkCrownId( ) {
-    return fkCrownId;
+  @Column( name = "kingdom_reign_enddate" )
+  public Date getKingdomReignEnddate( ) {
+    return kingdomReignEnddate;
   }
 
-  public void setFkCrownId( Integer fkCrownId ) {
-    this.fkCrownId = fkCrownId;
-  }
-
-  @Id
-  @Column( name = "id" )
-  public int getId( ) {
-    return id;
-  }
-
-  public void setId( int id ) {
-    this.id = id;
+  public void setKingdomReignEnddate( Date kingdomReignEnddate ) {
+    this.kingdomReignEnddate = kingdomReignEnddate;
   }
 
   @Basic
@@ -54,13 +54,13 @@ public class LeadersEntity {
   }
 
   @Basic
-  @Column( name = "kingdom_reign_enddate" )
-  public Date getKingdomReignEnddate( ) {
-    return kingdomReignEnddate;
+  @Column( name = "fk_crown_id" )
+  public Integer getFkCrownId( ) {
+    return fkCrownId;
   }
 
-  public void setKingdomReignEnddate( Date kingdomReignEnddate ) {
-    this.kingdomReignEnddate = kingdomReignEnddate;
+  public void setFkCrownId( Integer fkCrownId ) {
+    this.fkCrownId = fkCrownId;
   }
 
   @Override
@@ -68,11 +68,11 @@ public class LeadersEntity {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     LeadersEntity that = ( LeadersEntity ) o;
-    return fkKingdomId == that.fkKingdomId && id == that.id && fkResidentId == that.fkResidentId && Objects.equals( fkCrownId, that.fkCrownId ) && Objects.equals( kingdomReignEnddate, that.kingdomReignEnddate );
+    return id == that.id && fkKingdomId == that.fkKingdomId && fkResidentId == that.fkResidentId && Objects.equals( kingdomReignEnddate, that.kingdomReignEnddate ) && Objects.equals( fkCrownId, that.fkCrownId );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( fkKingdomId, fkCrownId, id, fkResidentId, kingdomReignEnddate );
+    return Objects.hash( id, fkKingdomId, kingdomReignEnddate, fkResidentId, fkCrownId );
   }
 }

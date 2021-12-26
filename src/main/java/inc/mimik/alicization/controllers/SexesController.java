@@ -23,7 +23,7 @@ public class SexesController {
     this.sexService = sexService;
   }
 
-  @GetMapping( "/get-all-sexes" )
+  @GetMapping( path = "/get-all-sexes" )
   public ResponseEntity<List<SexesEntity>> getSexes() {
     return new ResponseEntity<>( sexService.getAll(), HttpStatus.OK );
   }

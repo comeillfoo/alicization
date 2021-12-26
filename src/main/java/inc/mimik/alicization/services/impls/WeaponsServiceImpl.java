@@ -18,6 +18,11 @@ public class WeaponsServiceImpl implements WeaponsService {
     return repo.findAllByFkResidentId( id );
   }
 
+  @Override
+  public void deleteById( int id ) {
+    repo.deleteById( id );
+  }
+
   public WeaponsServiceImpl( @Autowired WeaponsRepository repo ) {
     this.repo = repo;
   }

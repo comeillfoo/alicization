@@ -6,20 +6,10 @@ import java.util.Objects;
 @Entity
 @Table( name = "weapons", schema = "s284733", catalog = "studs" )
 public class WeaponsEntity {
-  private int fkKingdomId;
   private int id;
   private String name;
+  private int fkKingdomId;
   private int fkResidentId;
-
-  @Basic
-  @Column( name = "fk_kingdom_id" )
-  public int getFkKingdomId( ) {
-    return fkKingdomId;
-  }
-
-  public void setFkKingdomId( int fkKingdomId ) {
-    this.fkKingdomId = fkKingdomId;
-  }
 
   @Id
   @Column( name = "id" )
@@ -42,6 +32,16 @@ public class WeaponsEntity {
   }
 
   @Basic
+  @Column( name = "fk_kingdom_id" )
+  public int getFkKingdomId( ) {
+    return fkKingdomId;
+  }
+
+  public void setFkKingdomId( int fkKingdomId ) {
+    this.fkKingdomId = fkKingdomId;
+  }
+
+  @Basic
   @Column( name = "fk_resident_id" )
   public int getFkResidentId( ) {
     return fkResidentId;
@@ -56,11 +56,11 @@ public class WeaponsEntity {
     if ( this == o ) return true;
     if ( o == null || getClass( ) != o.getClass( ) ) return false;
     WeaponsEntity that = ( WeaponsEntity ) o;
-    return fkKingdomId == that.fkKingdomId && id == that.id && fkResidentId == that.fkResidentId && Objects.equals( name, that.name );
+    return id == that.id && fkKingdomId == that.fkKingdomId && fkResidentId == that.fkResidentId && Objects.equals( name, that.name );
   }
 
   @Override
   public int hashCode( ) {
-    return Objects.hash( fkKingdomId, id, name, fkResidentId );
+    return Objects.hash( id, name, fkKingdomId, fkResidentId );
   }
 }

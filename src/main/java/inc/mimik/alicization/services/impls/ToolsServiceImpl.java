@@ -18,6 +18,11 @@ public class ToolsServiceImpl implements ToolsService {
     return repo.findAllByFkResidentId( id );
   }
 
+  @Override
+  public void deleteById( int id ) {
+    repo.deleteById( id );
+  }
+
   public ToolsServiceImpl( @Autowired ToolsRepository repo ) {
     this.repo = repo;
   }

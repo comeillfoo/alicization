@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ToolsRepository extends JpaRepository<ToolsEntity, Integer> {
   List<ToolsEntity> findAllByFkResidentId( int id );
+
+  void deleteById( int id );
 }

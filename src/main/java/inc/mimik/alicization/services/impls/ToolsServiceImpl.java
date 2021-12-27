@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ToolsServiceImpl implements ToolsService {
 
-  private ToolsRepository repo;
+  private final ToolsRepository repo;
 
   @Override
   public List<ToolsEntity> findAllByFkResidentId( int id ) {

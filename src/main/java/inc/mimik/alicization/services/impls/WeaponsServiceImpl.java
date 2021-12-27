@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class WeaponsServiceImpl implements WeaponsService {
 
-  private WeaponsRepository repo;
+  private final WeaponsRepository repo;
 
   @Override
   public List<WeaponsEntity> findAllByFkResidentId( int id ) {

@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class SexesServiceImpl implements SexesService {
 
-  private SexesRepository repo;
+  private final SexesRepository repo;
 
   public SexesServiceImpl( @Autowired SexesRepository repo ) {
     this.repo = repo;

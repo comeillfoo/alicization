@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class RegistrationsServiceImpl implements RegistrationsService {
 
-  private RegistrationsRepository repo;
+  private final RegistrationsRepository repo;
 
   @Override
   public List<RegistrationsEntity> findAllByIdIn( List<Integer> ids ) {

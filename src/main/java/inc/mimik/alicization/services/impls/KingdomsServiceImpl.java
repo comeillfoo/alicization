@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class KingdomsServiceImpl implements KingdomsService {
 
-  private KingdomsRepository repo;
+  private final KingdomsRepository repo;
 
 
   @Override

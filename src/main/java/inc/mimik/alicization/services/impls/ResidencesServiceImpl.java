@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class ResidencesServiceImpl implements ResidencesService {
-  private ResidencesRepository repo;
+  private final ResidencesRepository repo;
 
   public ResidencesServiceImpl( @Autowired ResidencesRepository repo ) {
     this.repo = repo;

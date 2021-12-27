@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class ResidentsServiceImpl implements ResidentsService {
 
-  private ResidentsRepository residentsRepo;
+  private final ResidentsRepository residentsRepo;
 
   @Override
   public List<ResidentsEntity> getAll( ) {

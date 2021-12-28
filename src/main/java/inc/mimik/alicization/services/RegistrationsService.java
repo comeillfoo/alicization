@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface RegistrationsService {
   List<RegistrationsEntity> findAllByIdIn( List<Integer> ids );
+
+  void deleteById( int id );
+
+  int visit( int residentId, int spanDays, int destKingdom );
 }

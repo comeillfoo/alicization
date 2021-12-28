@@ -18,6 +18,16 @@ public class RegistrationsServiceImpl implements RegistrationsService {
     return repo.findAllByIdIn( ids );
   }
 
+  @Override
+  public void deleteById( int id ) {
+    repo.deleteById( id );
+  }
+
+  @Override
+  public int visit( int residentId, int spanDays, int destKingdom ) {
+    return repo.visitKingdom( residentId, spanDays, destKingdom );
+  }
+
   public RegistrationsServiceImpl( @Autowired RegistrationsRepository repo ) {
     this.repo = repo;
   }

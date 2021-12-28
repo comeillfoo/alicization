@@ -2,6 +2,7 @@ package inc.mimik.alicization.controllers;
 
 import inc.mimik.alicization.entities.*;
 import inc.mimik.alicization.models.RenamingResidentModel;
+import inc.mimik.alicization.models.ToVisitRegistrationModel;
 import inc.mimik.alicization.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,9 +76,18 @@ public class ResidentsController {
     LOGGER.info( "\nupdateResidentNameById[ {} ]: started", renamedRequest.getId() );
     LOGGER.info( "\nupdateResidentNameById[ {} ]: trying to rename", renamedRequest.getId() );
     final int updated = residentsService.updateResidentNameById( renamedRequest.getId(), renamedRequest.getName() );
-    HttpStatus status = updated > 0? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+    final HttpStatus status = updated > 0? HttpStatus.OK : HttpStatus.BAD_REQUEST;
     LOGGER.info( "\nupdateResidentNameById[ {} ]: renamed {}", renamedRequest.getId(), updated );
     return new ResponseEntity<>( residentsService.getById( renamedRequest.getId() ), status );
+  }
+
+  @PostMapping( path = "/visit-to-kingdom", consumes = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<?> visitToKingdom( @RequestBody ToVisitRegistrationModel visitKingdom ) {
+    LOGGER.info( "\nvisitToKingdom[ {} ]: started", visitKingdom.getDestKingdom() );
+    LOGGER.info( "\nvisitToKingdom[ {} ]: trying to visit", visitKingdom.getDestKingdom() );
+    final int result = registrationsService.visit( visitKingdom.getResidentId(), visitKingdom.getSpanDays(), visitKingdom.getDestKingdom() );
+    final HttpStatus status = result == 1? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+    return new ResponseEntity<>( null, status );
   }
 
   @DeleteMapping( path = "/delete-resident-by-id/{id}" )
@@ -101,6 +111,14 @@ public class ResidentsController {
     LOGGER.info( "\ndeleteResidentWeaponById[ {} ]: deleting started", id );
     weaponsService.deleteById( id );
     LOGGER.info( "\ndeleteResidentWeaponById[ {} ]: successfully deleted resident's weapon", id );
+    return new ResponseEntity<>( null, HttpStatus.OK );
+  }
+
+  @DeleteMapping( path = "/delete-resident-registration-by-id/{id}" )
+  public ResponseEntity<?> deleteResidentRegistrationById( @PathVariable int id ) {
+    LOGGER.info( "\ndeleteResidentRegistrationById[ {} ]: deleting started", id );
+    registrationsService.deleteById( id );
+    LOGGER.info( "\ndeleteResidentRegistrationById[ {} ]: successfully deleted resident's registration", id );
     return new ResponseEntity<>( null, HttpStatus.OK );
   }
 

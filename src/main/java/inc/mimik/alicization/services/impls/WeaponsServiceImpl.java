@@ -6,6 +6,7 @@ import inc.mimik.alicization.services.WeaponsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -21,6 +22,16 @@ public class WeaponsServiceImpl implements WeaponsService {
   @Override
   public void deleteById( int id ) {
     repo.deleteById( id );
+  }
+
+  @Override
+  @Transactional
+  public WeaponsEntity addNewWeapon( int residentId, String name, int suit ) {
+    final WeaponsEntity weapon = new WeaponsEntity();
+    weapon.setFkResidentId( residentId );
+    weapon.setName( name );
+    weapon.setFkKingdomId( suit );
+    return repo.save( weapon );
   }
 
   public WeaponsServiceImpl( @Autowired WeaponsRepository repo ) {

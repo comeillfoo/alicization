@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@SequenceGenerator( name = "WID_SEQUENCE_GENERATOR",
+    sequenceName = "weapons_id_seq",
+    initialValue = 1,
+    allocationSize = 1
+)
 @Table( name = "weapons", schema = "s284733", catalog = "studs" )
 public class WeaponsEntity {
   private int id;
@@ -12,6 +17,7 @@ public class WeaponsEntity {
   private int fkResidentId;
 
   @Id
+  @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "WID_SEQUENCE_GENERATOR" )
   @Column( name = "id" )
   public int getId( ) {
     return id;

@@ -1,6 +1,8 @@
 package inc.mimik.alicization.controllers;
 
 import inc.mimik.alicization.entities.*;
+import inc.mimik.alicization.models.NewToolModel;
+import inc.mimik.alicization.models.NewWeaponModel;
 import inc.mimik.alicization.models.RenamingResidentModel;
 import inc.mimik.alicization.models.ToVisitRegistrationModel;
 import inc.mimik.alicization.services.*;
@@ -88,6 +90,22 @@ public class ResidentsController {
     final int result = registrationsService.visit( visitKingdom.getResidentId(), visitKingdom.getSpanDays(), visitKingdom.getDestKingdom() );
     final HttpStatus status = result == 1? HttpStatus.OK : HttpStatus.BAD_REQUEST;
     return new ResponseEntity<>( null, status );
+  }
+
+  @PostMapping( path = "/add-new-tool", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<ToolsEntity> addNewTool( @RequestBody NewToolModel newTool ) {
+    LOGGER.info( "\naddNewTool[ {} ]: started", newTool.getResidentId() );
+    LOGGER.info( "\naddNewTool[ {} ]: trying to add", newTool.getResidentId() );
+    final ToolsEntity result = toolsService.addNewTool( newTool.getResidentId( ), newTool.getName( ), newTool.getSuit( ) );
+    return new ResponseEntity<>( result, HttpStatus.OK );
+  }
+
+  @PostMapping( path = "/add-new-weapon", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<WeaponsEntity> addNewWeapon( @RequestBody NewWeaponModel newWeapon ) {
+    LOGGER.info( "\naddNewWeapon[ {} ]: started", newWeapon.getResidentId() );
+    LOGGER.info( "\naddNewWeapon[ {} ]: trying to add", newWeapon.getResidentId() );
+    final WeaponsEntity result = weaponsService.addNewWeapon( newWeapon.getResidentId( ), newWeapon.getName( ), newWeapon.getSuit( ) );
+    return new ResponseEntity<>( result, HttpStatus.OK );
   }
 
   @DeleteMapping( path = "/delete-resident-by-id/{id}" )

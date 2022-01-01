@@ -1,9 +1,17 @@
 package inc.mimik.alicization.entities;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@SequenceGenerator( name = "TID_SEQUENCE_GENERATOR",
+    sequenceName = "tools_id_seq",
+    initialValue = 1,
+    allocationSize = 1
+)
 @Table( name = "tools", schema = "s284733", catalog = "studs" )
 public class ToolsEntity {
   private int id;
@@ -12,6 +20,7 @@ public class ToolsEntity {
   private int fkResidentId;
 
   @Id
+  @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "TID_SEQUENCE_GENERATOR" )
   @Column( name = "id" )
   public int getId( ) {
     return id;

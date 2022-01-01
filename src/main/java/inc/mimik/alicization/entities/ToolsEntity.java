@@ -1,8 +1,5 @@
 package inc.mimik.alicization.entities;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-
 import javax.persistence.*;
 import java.util.Objects;
 

@@ -27,7 +27,10 @@ public class RegistrationsServiceImpl implements RegistrationsService {
   public int visit( int residentId, int spanDays, int destKingdom ) {
     return repo.visitKingdom( residentId, spanDays, destKingdom );
   }
-
+  @Override
+  public int residentMove(int residentId, int destKingdom){
+     return repo.residentMove(residentId, destKingdom);
+  }
   public RegistrationsServiceImpl( @Autowired RegistrationsRepository repo ) {
     this.repo = repo;
   }

@@ -16,4 +16,8 @@ public interface RegistrationsRepository extends JpaRepository<RegistrationsEnti
   int visitKingdom( @Param( "resident" )int residentId,
                      @Param( "spandays" ) int spanDays,
                      @Param( "dest_kingdom" ) int destKingdom );
+
+  @Procedure(value = "resident_move")
+  int residentMove(@Param("resident")int residentId,
+                   @Param("dest_kingdom")int destKingdom);
 }

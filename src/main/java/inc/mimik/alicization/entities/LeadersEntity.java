@@ -5,6 +5,11 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
+@SequenceGenerator( name = "LID_SEQUENCE_GENERATOR",
+    sequenceName = "leaders_id_seq",
+    initialValue = 1,
+    allocationSize = 1
+)
 @Table( name = "leaders", schema = "s284733", catalog = "studs" )
 public class LeadersEntity {
   private int id;
@@ -14,6 +19,7 @@ public class LeadersEntity {
   private Integer fkCrownId;
 
   @Id
+  @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "LID_SEQUENCE_GENERATOR" )
   @Column( name = "id" )
   public int getId( ) {
     return id;

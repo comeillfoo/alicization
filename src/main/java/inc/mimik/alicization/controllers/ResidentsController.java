@@ -12,7 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 //import javax.xml.ws.Response;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @CrossOrigin
@@ -25,6 +28,8 @@ public class ResidentsController {
   private RegistrationsService registrationsService;
   private WeaponsService weaponsService;
   private ToolsService toolsService;
+  private LeadersService leadersService;
+  private KingdomsService kingdomsService;
   private static final Logger LOGGER = LoggerFactory.getLogger( ResidentsController.class );
 
   @GetMapping( path = "/get-residents" )
@@ -123,6 +128,17 @@ public class ResidentsController {
         newResident.getFkSuitName(),
         newResident.getFkRoleName()
     );
+
+    if ( Objects.equals( result.getFkRoleName( ), "правитель" ) ) {
+      LOGGER.info( "\naddNewResident[ {} ]: trying to add new leader", result.getId() );
+      final KingdomsEntity kingdom = kingdomsService.findAllKingdoms().stream().filter( ( k ) -> ( Objects.equals( k.getFkSuitName( ), result.getFkSuitName( ) ) ) ).findAny().get();
+      LeadersEntity leader = leadersService.addNewLeader( result.getId(), kingdom.getId(), new Date( System.currentTimeMillis() ), null );
+      LOGGER.info( "\naddNewResident[ {} ]: succcessfully added new leader[ {} ]", leader.getFkResidentId(), leader.getId() );
+      LOGGER.info( "\naddNewResident[ {} ]: trying to coronate new leader", leader.getFkResidentId() );
+      final int is_coronate = leadersService.coronate( leader.getId() );
+      LOGGER.info( "\naddNewResident[ {} ]: added [ {] ]", leader.getId(), is_coronate );
+      LOGGER.info( "\naddNewResident[ {} ]: successfully coronated new leader", leader.getFkResidentId() );
+    }
     return new ResponseEntity<>( result, HttpStatus.OK );
   }
 
@@ -162,11 +178,15 @@ public class ResidentsController {
                               @Autowired ResidencesService residencesService,
                               @Autowired RegistrationsService registrationsService,
                               @Autowired WeaponsService weaponsService,
-                              @Autowired ToolsService toolsService ) {
+                              @Autowired ToolsService toolsService,
+                              @Autowired LeadersService leadersService,
+                              @Autowired KingdomsService kingdomsService ) {
     this.residentsService = residentsService;
     this.residencesService = residencesService;
     this.registrationsService = registrationsService;
     this.weaponsService = weaponsService;
     this.toolsService = toolsService;
+    this.leadersService = leadersService;
+    this.kingdomsService = kingdomsService;
   }
 }

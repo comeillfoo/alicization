@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@SequenceGenerator( name = "RID_SEQUENCE_GENERATOR",
+    sequenceName = "residents_id_seq",
+    initialValue = 1,
+    allocationSize = 1
+)
 @Table( name = "residents", schema = "s284733", catalog = "studs" )
 public class ResidentsEntity {
   private String name;
@@ -23,6 +28,7 @@ public class ResidentsEntity {
   }
 
   @Id
+  @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "RID_SEQUENCE_GENERATOR" )
   @Column( name = "id" )
   public int getId( ) {
     return id;

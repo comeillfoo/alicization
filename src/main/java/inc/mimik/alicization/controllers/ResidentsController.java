@@ -1,10 +1,7 @@
 package inc.mimik.alicization.controllers;
 
 import inc.mimik.alicization.entities.*;
-import inc.mimik.alicization.models.NewToolModel;
-import inc.mimik.alicization.models.NewWeaponModel;
-import inc.mimik.alicization.models.RenamingResidentModel;
-import inc.mimik.alicization.models.ToVisitRegistrationModel;
+import inc.mimik.alicization.models.*;
 import inc.mimik.alicization.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,6 +102,18 @@ public class ResidentsController {
     LOGGER.info( "\naddNewWeapon[ {} ]: started", newWeapon.getResidentId() );
     LOGGER.info( "\naddNewWeapon[ {} ]: trying to add", newWeapon.getResidentId() );
     final WeaponsEntity result = weaponsService.addNewWeapon( newWeapon.getResidentId( ), newWeapon.getName( ), newWeapon.getSuit( ) );
+    return new ResponseEntity<>( result, HttpStatus.OK );
+  }
+
+  @PostMapping( path = "/add-new-resident", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<ResidentsEntity> addNewResident( @RequestBody NewResidentModel newResident ) {
+    LOGGER.info( "\naddNewResident[ {} ]: started", newResident.getName() );
+    LOGGER.info( "\naddNewResident[ {} ]: trying to add", newResident.getName() );
+    final ResidentsEntity result = residentsService.addNewResident( newResident.getName(),
+        newResident.getFkSexName(),
+        newResident.getFkSuitName(),
+        newResident.getFkRoleName()
+    );
     return new ResponseEntity<>( result, HttpStatus.OK );
   }
 

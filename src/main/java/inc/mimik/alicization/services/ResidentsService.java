@@ -12,4 +12,7 @@ public interface ResidentsService {
 
   @Transactional
   int updateResidentNameById( int id, String name );
+
+  @Transactional
+  ResidentsEntity addNewResident( String name, String fkSexName, String fkSuitName, String fkRoleName );
 }

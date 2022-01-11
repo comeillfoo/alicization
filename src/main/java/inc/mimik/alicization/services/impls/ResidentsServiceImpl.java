@@ -1,6 +1,7 @@
 package inc.mimik.alicization.services.impls;
 
 import inc.mimik.alicization.entities.ResidentsEntity;
+import inc.mimik.alicization.entities.WeaponsEntity;
 import inc.mimik.alicization.repositories.ResidentsRepository;
 import inc.mimik.alicization.services.ResidentsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,17 @@ public class ResidentsServiceImpl implements ResidentsService {
   @Transactional
   public int updateResidentNameById( int id, String name ) {
     return residentsRepo.updateResidentNameById( id, name );
+  }
+
+  @Override
+  @Transactional
+  public ResidentsEntity addNewResident( String name, String fkSexName, String fkSuitName, String fkRoleName ) {
+    final ResidentsEntity resident = new ResidentsEntity();
+    resident.setName( name );
+    resident.setFkSexName( fkSexName );
+    resident.setFkSuitName( fkSuitName );
+    resident.setFkRoleName( fkRoleName );
+    return residentsRepo.save( resident );
   }
 
   public ResidentsServiceImpl( @Autowired ResidentsRepository residentsRepo ) {

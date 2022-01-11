@@ -6,6 +6,7 @@ import inc.mimik.alicization.services.ResidencesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,5 +20,11 @@ public class ResidencesServiceImpl implements ResidencesService {
   @Override
   public List<ResidencesEntity> findAllByFkResidentId( int id ) {
     return repo.findByFkResidentId( id );
+  }
+
+  @Override
+  @Transactional
+  public void deleteAllByFkRegistrationId( int id ) {
+    repo.deleteAllByFkRegistrationId( id );
   }
 }

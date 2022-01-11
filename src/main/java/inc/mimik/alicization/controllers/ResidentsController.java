@@ -169,7 +169,7 @@ public class ResidentsController {
   @DeleteMapping( path = "/delete-resident-registration-by-id/{id}" )
   public ResponseEntity<?> deleteResidentRegistrationById( @PathVariable int id ) {
     LOGGER.info( "\ndeleteResidentRegistrationById[ {} ]: deleting started", id );
-    registrationsService.deleteById( id );
+    residencesService.deleteAllByFkRegistrationId( id );
     LOGGER.info( "\ndeleteResidentRegistrationById[ {} ]: successfully deleted resident's registration", id );
     return new ResponseEntity<>( null, HttpStatus.OK );
   }

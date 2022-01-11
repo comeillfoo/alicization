@@ -102,7 +102,7 @@ public class ResidentsController {
     return new ResponseEntity<>( result, HttpStatus.OK );
   }
 
-  @PostMapping(path = "add-new-registration", consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(path = "/add-new-registration", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> addNewRegistration(@RequestBody ToMoveResidentModel newRegistration) {
     LOGGER.info( "\nmoveToKingdom[ {} ]: started", newRegistration.getDestKingdom() );
     LOGGER.info( "\nmoveToKingdom[ {} ]: trying to move", newRegistration.getDestKingdom() );

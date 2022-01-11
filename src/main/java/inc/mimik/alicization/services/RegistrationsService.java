@@ -2,6 +2,7 @@ package inc.mimik.alicization.services;
 
 import inc.mimik.alicization.entities.RegistrationsEntity;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface RegistrationsService {
@@ -10,4 +11,6 @@ public interface RegistrationsService {
   void deleteById( int id );
 
   int visit( int residentId, int spanDays, int destKingdom );
+
+  int residentMove(int residentId, int destKingdom);
 }

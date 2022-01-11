@@ -97,6 +97,15 @@ public class ResidentsController {
     return new ResponseEntity<>( result, HttpStatus.OK );
   }
 
+  @PostMapping(path = "add-new-registration", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> addNewRegistration(@RequestBody ToMoveResidentModel newRegistration) {
+    LOGGER.info( "\nmoveToKingdom[ {} ]: started", newRegistration.getDestKingdom() );
+    LOGGER.info( "\nmoveToKingdom[ {} ]: trying to move", newRegistration.getDestKingdom() );
+    final int result = registrationsService.residentMove( newRegistration.getResidentId(), newRegistration.getDestKingdom() );
+    final HttpStatus status = result == 1? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+    return new ResponseEntity<>(null, status);
+  }
+
   @PostMapping( path = "/add-new-weapon", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
   public ResponseEntity<WeaponsEntity> addNewWeapon( @RequestBody NewWeaponModel newWeapon ) {
     LOGGER.info( "\naddNewWeapon[ {} ]: started", newWeapon.getResidentId() );
